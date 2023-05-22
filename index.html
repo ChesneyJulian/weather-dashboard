@@ -1,35 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/reset.css"/>
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./assets/css/style.css"/>
-</head>
-<body>
-    <main>
-        <form>
-            <fieldset class="col-12 col-md-4 p-5">
-              <legend>Search for a City: </legend>
-              <div class=" ">
-                <input type="text" id="TextInput" class="form-control" placeholder="City Name">
-              </div>
-              <button type="submit" class="btn btn-primary col-12 my-3">Submit</button>
-              <div class="mb-3">
-               
-                <select id="Select" class="form-select">
-                  <option> Past Searches</option>
-                </select>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body class="bg-primary d-flex justify-content-center mw-100">
+    <main
+      class="col-11 d-flex flex-wrap bg-light h-100"
+      style="min-height: 100vh">
+      <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">Weather Dashboard</h1>
+      <form>
+        <fieldset class="col-12 p-5">
+          <legend>Search for a City:</legend>
+          <div class=" ">
+            <input
+              type="text"
+              id="TextInput"
+              class="form-control"
+              placeholder="City Name"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary col-12 my-3">
+            Submit
+          </button>
+          <div class="mb-3">
+            <select id="Select" class="form-select">
+              <option>Past Searches</option>
+            </select>
+          </div>
+        </fieldset>
+      </form>
+      <div class="card border-secondary my-5 p-3 h-25 col-8">
+        <div class="card-header p-3 bg-primary text-light">
+          City name and icon
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Temp: <br />
+            Wind: <br />
+            Humidity
+          </p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column flex-wrap p-3">
+        <h2 class="text-primary">5-Day Forecast:</h2>
+        <div class="forecast-cards d-flex justify-content-end">
+          <div class="card text-white bg-info m-1">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h4 class="card-title">Info card title</h4>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
             </div>
-              
-            </fieldset>
-          </form>
-          
+          </div>
+          <div class="card text-white bg-info m-1">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h4 class="card-title">Info card title</h4>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+          <div class="card text-white bg-info m-1">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h4 class="card-title">Info card title</h4>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+          <div class="card text-white bg-info m-1">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h4 class="card-title">Info card title</h4>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+          <div class="card text-white bg-info m-1">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h4 class="card-title">Info card title</h4>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
