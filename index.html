@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
-  <body class="bg-primary d-flex justify-content-center mw-100">
+  <body class="bg-primary row">
     <main
-      class="col-11 d-flex flex-wrap bg-light h-100"
-      style="min-height: 100vh">
-      <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">Weather Dashboard</h1>
+      class="col-12 bg-light h-100 mx-7"
+      style="min-height: 100vh"
+    >
+      <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">
+        Weather Dashboard
+      </h1>
       <form>
-        <fieldset class="col-12 p-5">
+        <fieldset class="col-12 col-md-4 p-5">
           <legend>Search for a City:</legend>
           <div class=" ">
             <input
@@ -25,7 +28,11 @@
               placeholder="City Name"
             />
           </div>
-          <button id="search-btn" type="submit" class="btn btn-primary col-12 my-3">
+          <button
+            id="search-btn"
+            type="submit"
+            class="btn btn-primary col-12 my-3"
+          >
             Search
           </button>
           <div class="mb-3">
@@ -35,70 +42,25 @@
           </div>
         </fieldset>
       </form>
-      <div class="current-weather card border-secondary my-5 p-3 h-25 col-8">
-        <div id="main-card-header" class="card-header p-3 bg-primary text-light"></div>
-        <div id="main-card" class="card-body" style="list-style: none;">
-            <li id="temp"></li>
-            <li id="wind"></li>
-            <li id="humidity"></li>
+      <div class ='col-6'>
+        <div class="current-weather card border-secondary my-5 p-3 h-25 col-5">
+        <div
+          id="main-card-header"
+          class="card-header p-3 bg-primary text-light"
+        ></div>
+        <div id="main-card" class="card-body" style="list-style: none">
+          <li id="temp"></li>
+          <li id="wind"></li>
+          <li id="humidity"></li>
         </div>
       </div>
+    </div>
+      
 
-      <div  class="d-flex flex-column flex-wrap p-3">
+      <div id ='forecast' class="row p-3">
         <h2 class="text-primary">5-Day Forecast:</h2>
-        <div class="forecast-cards d-flex justify-content-end">
-          <div class="card text-white bg-info m-1">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h4 class="card-title">Info card title</h4>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div class="card text-white bg-info m-1">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h4 class="card-title">Info card title</h4>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div class="card text-white bg-info m-1">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h4 class="card-title">Info card title</h4>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div class="card text-white bg-info m-1">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h4 class="card-title">Info card title</h4>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div class="card text-white bg-info m-1">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h4 class="card-title">Info card title</h4>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
+        
         </div>
-      </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>

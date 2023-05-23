@@ -1,5 +1,5 @@
 // set all cards initial display to none so they do not appear empty upon first loading page
-
+var now = dayjs().format('MM-DD-YYYY');
 var currentWeather = document.querySelector('.current-weather');
    currentWeather.style.display = 'none';
    
@@ -22,7 +22,7 @@ var getApi = function (city) {
         console.log(coord);
         console.log(lon);
         console.log(lat);
-        var now = dayjs().format('MM-DD-YYYY');
+        
         console.log(now);
 
         getForecast(lat, lon);
@@ -54,13 +54,39 @@ var getForecast = function (lat, lon) {
     })
     .then(function(data){
         console.log(data);
-        // use day js and math.round to find current time and change it to the closest multiple of 3 to use with the forecast api
-        var currentTime = dayjs().format('HH');
-        if (currentTime >= 0) {
-            var multipleTime = (Math.round(currentTime/3));
+        
+        for (i=5; i <= data.list.length; i+=8) {
+            console.log( 'new Day');
+            var forecastTemp = (data.list[i].main.temp);
+            var forecastHum = (data.list[i].main.humidity);
+            var forecastWind = (data.list[i].wind.speed);
+            var forecastDate = (data.list[i].dt_txt);
+
+            var forecastEl = document.getElementById('forecast');
+            var forecastCard = document.createElement('div');
+            var cardEl = document.createElement('div');
+            var forecastHeader = document.createElement('div');
+            var forecastBody = document.createElement('div');
+            var forecastIcon = document.createElement('h4');
+            var forecastInfo = document.createElement('p');
+
+            forecastCard.setAttribute('class', 'd-flex col-12 col-md ');
+            cardEl.setAttribute('class', 'card text-white bg-info m-1');
+            forecastHeader.setAttribute("class","card-header");
+            forecastBody.setAttribute('class','card-body');
+            forecastIcon.setAttribute('class','card-title');
+            forecastInfo.setAttribute('class','card-text');
+
+            cardEl.textContent = 'Temp: ' + forecastTemp + '\n Humidity: ' + forecastHum + "\n Wind: " + forecastWind;
+            forecastEl.appendChild(forecastCard);
+            forecastCard.appendChild(cardEl);
+            forecastCard.appendChild(forecastHeader);
+            forecastCard.appendChild(forecastBody);
+            forecastBody.appendChild(forecastIcon);
+            forecastBody.appendChild(forecastInfo);
         }
-        console.log(multipleTime);
-        console.log(data.list[multipleTime].main.temp);
+        
+    
 
     })
     
