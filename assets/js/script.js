@@ -19,7 +19,11 @@ var getApi = function (city) {
         // set lon and lat to separate variables to be used with forecast api
         var lon = coord.lon;
         var lat = coord.lat;
-        console.log(data);
+        console.log(coord);
+        console.log(lon);
+        console.log(lat);
+        var now = dayjs().format('MM-DD-YYYY');
+        console.log(now);
 
         getForecast(lat, lon);
 
@@ -32,7 +36,7 @@ var getApi = function (city) {
         tempEl.textContent = "Temp: " + data.main.temp +" °F ";
         windEl.textContent = "Wind: " + data.wind.speed + ' MPH' ;
         humidityEl.textContent = "Humidity: " + data.main.humidity + ' %';
-        mainCardHeader.textContent = data.name;
+        mainCardHeader.textContent = data.name + ' ' + now;
         // display currentWeather
         currentWeather.style.display = null;
 
@@ -43,7 +47,14 @@ var getApi = function (city) {
 
 
 var getForecast = function (lat, lon) {
-    var apiUrl = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon="+ lon +"&appid=" + apiKey;
+    var forecastApiUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid="+ apiKey + "&units=imperial";
+    fetch(forecastApiUrl)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+    })
     
 }
 
