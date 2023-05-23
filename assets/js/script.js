@@ -54,6 +54,14 @@ var getForecast = function (lat, lon) {
     })
     .then(function(data){
         console.log(data);
+        // use day js and math.round to find current time and change it to the closest multiple of 3 to use with the forecast api
+        var currentTime = dayjs().format('HH');
+        if (currentTime >= 0) {
+            var multipleTime = (Math.round(currentTime/3));
+        }
+        console.log(multipleTime);
+        console.log(data.list[multipleTime].main.temp);
+
     })
     
 }
