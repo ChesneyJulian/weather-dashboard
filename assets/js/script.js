@@ -1,4 +1,9 @@
-    var apiKey = "270870f74b0a4167c2dabb9a30b68d16" 
+// set all cards initial display to none so they do not appear empty upon first loading page
+
+var currentWeather = document.querySelector('.current-weather');
+   currentWeather.style.display = 'none';
+   
+var apiKey = "270870f74b0a4167c2dabb9a30b68d16" 
 // create function to fetch openweathermap api 
 var getApi = function (city) {
 
@@ -17,29 +22,38 @@ var getApi = function (city) {
         console.log(data);
 
         getForecast(lat, lon);
-        
+
+
         // set textcontent for main card using data from api fetch
         var tempEl = document.getElementById('temp');
         var windEl = document.getElementById('wind');
         var humidityEl = document.getElementById('humidity');
         var mainCardHeader = document.getElementById('main-card-header');
-        tempEl.textContent = "Temp: " + data.main.temp;
-        windEl.textContent = "Wind: " + data.wind.speed;
-        humidityEl.textContent = "Humidity: " + data.main.humidity;
+        tempEl.textContent = "Temp: " + data.main.temp +" °F ";
+        windEl.textContent = "Wind: " + data.wind.speed + ' MPH' ;
+        humidityEl.textContent = "Humidity: " + data.main.humidity + ' %';
         mainCardHeader.textContent = data.name;
+        // display currentWeather
+        currentWeather.style.display = null;
+
+        
     })
 
 }
 
+
 var getForecast = function (lat, lon) {
     var apiUrl = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon="+ lon +"&appid=" + apiKey;
+    
 }
 
 // set empty array to store all searched cities
-var cities = []
+var cities = []  
+  
 document.getElementById('search-btn').addEventListener('click', function(event){
     event.preventDefault();
     // set textinput value to var input using DOM
+    
     var input = document.getElementById('TextInput').value;
     // push input to cities array 
     cities.push(input);
@@ -51,6 +65,7 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     var currentCity = city[city.length - 1];
     console.log(currentCity); 
     // call getApi function using currentcity
+    
     getApi(currentCity);
     
 })
