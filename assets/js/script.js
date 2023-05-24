@@ -1,9 +1,6 @@
-// set all cards initial display to none so they do not appear empty upon first loading page
-
-
+// set main cards initial display to none so it does not appear empty upon first loading page
 var currentWeather = document.querySelector('.current-weather');
 currentWeather.style.display = 'none';
-
 
 
 var apiKey = "270870f74b0a4167c2dabb9a30b68d16" 
@@ -17,6 +14,10 @@ var getApi = function (city) {
         return response.json();
     })
     .then(function(data){
+
+        var searchForm = document.getElementById('search-form');
+        // add class col-md so that search form shrinks and allows room for results
+        searchForm.classList.add('col-md')
         // set data.coord to var coord so the city's coordinates are saved 
         var coord = data.coord; 
         // set lon and lat to separate variables to be used with forecast api
@@ -137,5 +138,6 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     // call getApi function using currentcity
     
     getApi(currentCity);
+   
     
 })
