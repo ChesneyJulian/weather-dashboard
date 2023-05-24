@@ -55,12 +55,18 @@ var getForecast = function (lat, lon) {
     .then(function(data){
         console.log(data);
         
-        for (i=5; i <= data.list.length; i+=8) {
+
+        for (i=4; i <= data.list.length; i+=8) {
             console.log( 'new Day');
             var forecastTemp = (data.list[i].main.temp);
             var forecastHum = (data.list[i].main.humidity);
             var forecastWind = (data.list[i].wind.speed);
-            var forecastDate = (data.list[i].dt_txt);
+            var dataDate = (data.list[i].dt_txt);
+            var month = dataDate.slice(5, 7);
+            var day = dataDate.slice(8, 10);
+            var year = dataDate.slice(0, 4);
+            var forecastDate = month + '-' + day + '-' + year;
+        
 
             var forecastEl = document.getElementById('forecast');
             var forecastCard = document.createElement('div');
@@ -68,22 +74,32 @@ var getForecast = function (lat, lon) {
             var forecastHeader = document.createElement('div');
             var forecastBody = document.createElement('div');
             var forecastIcon = document.createElement('h4');
-            var forecastInfo = document.createElement('p');
+            var forecastListTemp = document.createElement('li');
+            var forecastListHum = document.createElement('li');
+            var forecastListWind = document.createElement('li');
 
-            forecastCard.setAttribute('class', 'd-flex col-12 col-md ');
-            cardEl.setAttribute('class', 'card text-white bg-info m-1');
+            forecastCard.setAttribute('class', 'col-12 col-md');
+            cardEl.setAttribute('class', 'card text-white bg-info');
             forecastHeader.setAttribute("class","card-header");
-            forecastBody.setAttribute('class','card-body');
+            forecastBody.setAttribute('class','card-body h-100 list-style-type-none');
             forecastIcon.setAttribute('class','card-title');
-            forecastInfo.setAttribute('class','card-text');
 
-            cardEl.textContent = 'Temp: ' + forecastTemp + '\n Humidity: ' + forecastHum + "\n Wind: " + forecastWind;
+            forecastHeader.textContent = forecastDate;
+            forecastListHum.textContent = "Humidity: " + forecastHum + " %";
+            forecastListTemp.textContent = "Temp: " + forecastTemp + "°F";
+            forecastListWind.textContent = "Wind: " + forecastWind + " MPH"
+
             forecastEl.appendChild(forecastCard);
+            
             forecastCard.appendChild(cardEl);
-            forecastCard.appendChild(forecastHeader);
-            forecastCard.appendChild(forecastBody);
-            forecastBody.appendChild(forecastIcon);
-            forecastBody.appendChild(forecastInfo);
+            cardEl.appendChild(forecastHeader);
+            cardEl.appendChild(forecastBody);
+            forecastBody.appendChild(forecastListTemp);
+            forecastBody.appendChild(forecastListHum);
+            forecastBody.appendChild(forecastListWind);
+            
+            // forecastCard.appendChild(forecastBody);
+            forecastHeader.appendChild(forecastIcon);
         }
         
     
@@ -104,6 +120,8 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     cities.push(input);
     // use cities array to store searched cities in local storage with key 'city'
     localStorage.setItem('city', JSON.stringify(cities));
+
+    
     // set var city to value of localstorage('city')
     var city = JSON.parse(localStorage.getItem('city'));
     // set var currentCity to last item in city array because it is the last city entered and the current one being searched

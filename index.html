@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
-  <body class="bg-primary row">
-    <main
-      class="col-12 bg-light h-100 mx-7"
-      style="min-height: 100vh"
-    >
-      <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">
+  <body class="bg-primary row ">
+    <header >
+        <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">
         Weather Dashboard
       </h1>
-      <form>
-        <fieldset class="col-12 col-md-4 p-5">
+     </header>
+        <main
+      class="col-12 bg-light h-100 mx-7 d-flex flex-wrap justify-content-space-evenly"
+      style="min-height: 100vh" >
+      <form class="col-12 col-md-4 p-5">
+        <fieldset >
           <legend>Search for a City:</legend>
           <div class=" ">
             <input
@@ -42,13 +43,13 @@
           </div>
         </fieldset>
       </form>
-      <div class ='col-6'>
-        <div class="current-weather card border-secondary my-5 p-3 h-25 col-5">
+      <div class ='col-7 h-100'>
+        <div class="current-weather card border-secondary my-5 p-3 h-25">
         <div
           id="main-card-header"
           class="card-header p-3 bg-primary text-light"
         ></div>
-        <div id="main-card" class="card-body" style="list-style: none">
+        <div id="main-card" class="card-body " style="list-style: none">
           <li id="temp"></li>
           <li id="wind"></li>
           <li id="humidity"></li>
@@ -57,7 +58,7 @@
     </div>
       
 
-      <div id ='forecast' class="row p-3">
+      <div id ='forecast' class="d-flex row p-3 h-100 w-100">
         <h2 class="text-primary">5-Day Forecast:</h2>
         
         </div>
