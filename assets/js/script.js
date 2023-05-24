@@ -85,11 +85,14 @@ var buildForecast = function(data) {
         var forecastHum = (data.list[i].main.humidity);
         var forecastWind = (data.list[i].wind.speed);
         var dataDate = (data.list[i].dt_txt);
+        var forecastIconCode = data.list[i].weather[0].icon;
         // slice dataDate and rejoin in forecastDate so that format matches same format as 'now' variable in main card
         var month = dataDate.slice(5, 7);
         var day = dataDate.slice(8, 10);
         var year = dataDate.slice(0, 4);
         var forecastDate = month + '-' + day + '-' + year;
+        
+        
     
         // create card elements
 
@@ -98,7 +101,7 @@ var buildForecast = function(data) {
         var cardEl = document.createElement('div');
         var forecastHeader = document.createElement('div');
         var forecastBody = document.createElement('div');
-        var forecastIcon = document.createElement('h4');
+        var forecastIcon = document.createElement('img');
         var forecastListTemp = document.createElement('li');
         var forecastListHum = document.createElement('li');
         var forecastListWind = document.createElement('li');
@@ -108,7 +111,8 @@ var buildForecast = function(data) {
         cardEl.setAttribute('class', 'card text-white bg-info');
         forecastHeader.setAttribute("class","card-header");
         forecastBody.setAttribute('class','card-body h-100 list-style-type-none');
-        forecastIcon.setAttribute('class','card-title');
+        // set icon src using specific icon code from data for each index position
+        forecastIcon.src =( 'https://openweathermap.org/img/wn/' + forecastIconCode + '.png');
 
         // set textcontent to display info defined in beginning of function 
         forecastHeader.textContent = forecastDate;
