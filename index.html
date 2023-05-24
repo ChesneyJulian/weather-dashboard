@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <title>Weather Forecast Dashboard</title>
+   <!-- add bootstrap in theme cerulean -->
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
+
   <body class="bg-primary row ">
+    <!-- create page header -->
     <header >
         <h1 class="col-12 bg-primary text-light text-center p-3 mb-0">
         Weather Dashboard
       </h1>
      </header>
-        <main class="col-12 bg-light h-100 mx-7 d-flex flex-wrap justify-content-space-evenly" style="min-height: 100vh" >
+     <!-- create main section for content -->
+    <main class="col-12 bg-light h-100 mx-7 d-flex flex-wrap justify-content-space-evenly" style="min-height: 100vh" >
+        <!-- create search form to always be present on screen  -->
       <form class="col-12 p-5" id="search-form">
         <fieldset >
           <legend>Search for a City:</legend>
@@ -32,7 +36,7 @@
           </button>
         </fieldset>
       </form>
-       
+       <!-- create empty current weather section to add data to once user enters search input -->
       <div class ='col-7 h-100'>
         <div class="current-weather card border-secondary my-5 p-3 h-25">
         <div id="main-card-header" class="card-header p-3 bg-primary text-light"></div>
@@ -44,7 +48,7 @@
         </div>
       </div>
     </div>
-      
+      <!-- create empty forecast section to add data and elements to once user enters search input -->
     <div class="w-100 m-3">
         <h2 class="forecast-title text-primary"></h2>
         <div id ='forecast' class="d-flex row p-3 h-100 ">
@@ -53,7 +57,9 @@
 
     
     </main>
+    <!-- add dayjs -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <!-- add fontawesome -->
     <script src="https://kit.fontawesome.com/a84498ba94.js" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
   </body>

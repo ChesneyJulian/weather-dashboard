@@ -149,9 +149,9 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     localStorage.setItem('city', JSON.stringify(cities));
     // call getApi function using currentcity
     
+    // clear out forecast cards from screen if user searches while cards are already present on the screen 
     if (document.querySelector('.forecast-card')){
         document.querySelector('#forecast').innerHTML = null;
-        
     }
     
     getApi(input);
