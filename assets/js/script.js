@@ -1,12 +1,17 @@
 // set main cards initial display to none so it does not appear empty upon first loading page
 var currentWeather = document.querySelector('.current-weather');
 currentWeather.style.display = 'none';
-
+var forecastEl = document.querySelector('#forecast');
 
 var apiKey = "270870f74b0a4167c2dabb9a30b68d16" 
 // create function to fetch openweathermap api 
-var getApi = function (city) {
 
+
+
+
+
+ 
+var getApi = function (city) {
     var requestUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + "&units=imperial";
 
     fetch(requestUrl)
@@ -29,7 +34,7 @@ var getApi = function (city) {
         var now = dayjs().format('MM-DD-YYYY');
         console.log(now);
 
-        getForecast(lat, lon);
+        
 
 
         // set textcontent for main card using data from api fetch
@@ -43,6 +48,7 @@ var getApi = function (city) {
         mainCardHeader.textContent = data.name + ' ' + now;
         // display currentWeather
         currentWeather.style.display = null;
+        getForecast(lat, lon);
 
         
     })
@@ -58,62 +64,62 @@ var getForecast = function (lat, lon) {
     })
     .then(function(data){
         console.log(data);
-        
-// use for loop to build forecastCards using data from fetch request; increment by 8 so that pulls data from around noon each day for five days
-        for (i=4; i <= data.list.length; i+=8) {
-            console.log( 'new Day');
-            // set variables to use for textContent defined as data pulled from api at each index position i 
-            var forecastTemp = (data.list[i].main.temp);
-            var forecastHum = (data.list[i].main.humidity);
-            var forecastWind = (data.list[i].wind.speed);
-            var dataDate = (data.list[i].dt_txt);
-            // slice dataDate and rejoin in forecastDate so that format matches same format as 'now' variable in main card
-            var month = dataDate.slice(5, 7);
-            var day = dataDate.slice(8, 10);
-            var year = dataDate.slice(0, 4);
-            var forecastDate = month + '-' + day + '-' + year;
-        
-// create card elements
-            var forecastEl = document.querySelector('#forecast'); 
-            var forecastTitle = document.querySelector('.forecast-title');
-            var forecastCard = document.createElement('div');
-            var cardEl = document.createElement('div');
-            var forecastHeader = document.createElement('div');
-            var forecastBody = document.createElement('div');
-            var forecastIcon = document.createElement('h4');
-            var forecastListTemp = document.createElement('li');
-            var forecastListHum = document.createElement('li');
-            var forecastListWind = document.createElement('li');
-
-            // set class for card elements and utilize bootstrap styling
-            forecastCard.setAttribute('class', 'col-12 col-md');
-            cardEl.setAttribute('class', 'card text-white bg-info');
-            forecastHeader.setAttribute("class","card-header");
-            forecastBody.setAttribute('class','card-body h-100 list-style-type-none');
-            forecastIcon.setAttribute('class','card-title');
-
-            // set textcontent to display info defined in beginning of function 
-            forecastHeader.textContent = forecastDate;
-            forecastListHum.textContent = "Humidity: " + forecastHum + " %";
-            forecastListTemp.textContent = "Temp: " + forecastTemp + "°F";
-            forecastListWind.textContent = "Wind: " + forecastWind + " MPH";
-            forecastTitle.textContent= "5-Day Forecast:";
-
-            // append elements to forecastEl section of html 
-            forecastEl.appendChild(forecastCard);
-            forecastCard.appendChild(cardEl);
-            cardEl.appendChild(forecastHeader);
-            cardEl.appendChild(forecastBody);
-            forecastBody.appendChild(forecastListTemp);
-            forecastBody.appendChild(forecastListHum);
-            forecastBody.appendChild(forecastListWind);
-            forecastHeader.appendChild(forecastIcon);
-        }
-        
-    
-
+        buildForecast(data);
     })
     
+}
+
+var buildForecast = function(data) {
+    // use for loop to build forecastCards using data from fetch request;start at 6 so data is pulled from 3pm each day; increment by 8 so that pulls data from around noon each day for five days
+    for (i=6; i <= data.list.length; i+=8) {
+        console.log( 'new Day');
+        // set variables to use for textContent defined as data pulled from api at each index position i 
+        var forecastTemp = (data.list[i].main.temp);
+        var forecastHum = (data.list[i].main.humidity);
+        var forecastWind = (data.list[i].wind.speed);
+        var dataDate = (data.list[i].dt_txt);
+        // slice dataDate and rejoin in forecastDate so that format matches same format as 'now' variable in main card
+        var month = dataDate.slice(5, 7);
+        var day = dataDate.slice(8, 10);
+        var year = dataDate.slice(0, 4);
+        var forecastDate = month + '-' + day + '-' + year;
+    
+// create card elements
+
+        var forecastTitle = document.querySelector('.forecast-title');
+        var forecastCard = document.createElement('div');
+        var cardEl = document.createElement('div');
+        var forecastHeader = document.createElement('div');
+        var forecastBody = document.createElement('div');
+        var forecastIcon = document.createElement('h4');
+        var forecastListTemp = document.createElement('li');
+        var forecastListHum = document.createElement('li');
+        var forecastListWind = document.createElement('li');
+
+        // set class for card elements and utilize bootstrap styling
+        forecastCard.setAttribute('class', 'forecast-card col-12 col-md');
+        cardEl.setAttribute('class', 'card text-white bg-info');
+        forecastHeader.setAttribute("class","card-header");
+        forecastBody.setAttribute('class','card-body h-100 list-style-type-none');
+        forecastIcon.setAttribute('class','card-title');
+
+        // set textcontent to display info defined in beginning of function 
+        forecastHeader.textContent = forecastDate;
+        forecastListHum.textContent = "Humidity: " + forecastHum + " %";
+        forecastListTemp.textContent = "Temp: " + forecastTemp + "°F";
+        forecastListWind.textContent = "Wind: " + forecastWind + " MPH";
+        forecastTitle.textContent= "5-Day Forecast:";
+
+        // append elements to forecastEl section of html 
+        forecastEl.appendChild(forecastCard);
+        forecastCard.appendChild(cardEl);
+        cardEl.appendChild(forecastHeader);
+        cardEl.appendChild(forecastBody);
+        forecastBody.appendChild(forecastListTemp);
+        forecastBody.appendChild(forecastListHum);
+        forecastBody.appendChild(forecastListWind);
+        forecastHeader.appendChild(forecastIcon);
+    }
 }
 
 // set empty array to store all searched cities
@@ -137,7 +143,10 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     console.log(currentCity); 
     // call getApi function using currentcity
     
+    if (document.querySelector('.forecast-card')){
+        document.querySelector('#forecast').innerHTML = null;
+    }
+    
     getApi(currentCity);
-   
     
 })
