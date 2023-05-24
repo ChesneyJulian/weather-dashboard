@@ -27,27 +27,17 @@
               placeholder="City Name"
             />
           </div>
-          <button
-            id="search-btn"
-            type="submit"
-            class="btn btn-primary col-12 my-3"
-          >
+          <button id="search-btn" type="submit" class="btn btn-primary col-12 my-3">
             Search
           </button>
-          <div class="mb-3">
-            <select id="Select" class="form-select">
-              <option>Past Searches</option>
-            </select>
-          </div>
         </fieldset>
       </form>
+       
       <div class ='col-7 h-100'>
         <div class="current-weather card border-secondary my-5 p-3 h-25">
-        <div
-          id="main-card-header"
-          class="card-header p-3 bg-primary text-light"
-        ></div>
-        <div id="main-card" class="card-body " style="list-style: none">
+        <div id="main-card-header" class="card-header p-3 bg-primary text-light"></div>
+        <div id="main-card" class="card-body " style="list-style: none"> 
+          <img id="icon"/>
           <li id="temp"></li>
           <li id="wind"></li>
           <li id="humidity"></li>
@@ -64,6 +54,7 @@
     
     </main>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://kit.fontawesome.com/a84498ba94.js" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

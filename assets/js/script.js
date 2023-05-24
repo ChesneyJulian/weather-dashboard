@@ -2,23 +2,29 @@
 var currentWeather = document.querySelector('.current-weather');
 currentWeather.style.display = 'none';
 var forecastEl = document.querySelector('#forecast');
-
+// set empty array to store all searched cities
+var cities = [] 
 var apiKey = "270870f74b0a4167c2dabb9a30b68d16" 
-// create function to fetch openweathermap api 
+    // set var city to value of localstorage('city')
+    var city = JSON.parse(localStorage.getItem('city'));
 
 
-
-
-
- 
+ // create function to fetch openweathermap api 
 var getApi = function (city) {
     var requestUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + "&units=imperial";
 
     fetch(requestUrl)
-    .then(function(response) {
-        return response.json();
+    .then(function(response) {  
+        // add conditional so if response.status is not found, it will alert user to enter in valid city name
+          if (response.status === 404) {
+            alert('Please enter valid City Name');
+        }
+        return response.json()
     })
     .then(function(data){
+
+
+        
 
         var searchForm = document.getElementById('search-form');
         // add class col-md so that search form shrinks and allows room for results
@@ -28,12 +34,14 @@ var getApi = function (city) {
         // set lon and lat to separate variables to be used with forecast api
         var lon = coord.lon;
         var lat = coord.lat;
-        console.log(coord);
+        console.log(data);
         console.log(lon);
         console.log(lat);
         var now = dayjs().format('MM-DD-YYYY');
         console.log(now);
-
+        var iconCode = data.weather[0].icon;
+        var iconEl = document.getElementById('icon');
+        iconEl.src = ( 'https://openweathermap.org/img/wn/' + iconCode + '.png');
         
 
 
@@ -54,7 +62,6 @@ var getApi = function (city) {
     })
 
 }
-
 
 var getForecast = function (lat, lon) {
     var forecastApiUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid="+ apiKey + "&units=imperial";
@@ -84,7 +91,7 @@ var buildForecast = function(data) {
         var year = dataDate.slice(0, 4);
         var forecastDate = month + '-' + day + '-' + year;
     
-// create card elements
+        // create card elements
 
         var forecastTitle = document.querySelector('.forecast-title');
         var forecastCard = document.createElement('div');
@@ -122,8 +129,10 @@ var buildForecast = function(data) {
     }
 }
 
-// set empty array to store all searched cities
-var cities = []  
+ 
+
+
+
   
 document.getElementById('search-btn').addEventListener('click', function(event){
     event.preventDefault();
@@ -134,19 +143,13 @@ document.getElementById('search-btn').addEventListener('click', function(event){
     cities.push(input);
     // use cities array to store searched cities in local storage with key 'city'
     localStorage.setItem('city', JSON.stringify(cities));
-
-    
-    // set var city to value of localstorage('city')
-    var city = JSON.parse(localStorage.getItem('city'));
-    // set var currentCity to last item in city array because it is the last city entered and the current one being searched
-    var currentCity = city[city.length - 1];
-    console.log(currentCity); 
     // call getApi function using currentcity
     
     if (document.querySelector('.forecast-card')){
         document.querySelector('#forecast').innerHTML = null;
+        
     }
     
-    getApi(currentCity);
+    getApi(input);
     
 })
