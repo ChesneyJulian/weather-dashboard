@@ -1,6 +1,7 @@
 // set main cards initial display to none so it does not appear empty upon first loading page
 var currentWeather = document.querySelector('.current-weather');
 currentWeather.style.display = 'none';
+// create variable for section with forecast content
 var forecastEl = document.querySelector('#forecast');
 // set empty array to store all searched cities
 var cities = [] 
@@ -9,6 +10,7 @@ var apiKey = "270870f74b0a4167c2dabb9a30b68d16"
 var city = JSON.parse(localStorage.getItem('city'));
 // set var for div containing past search btns
 var pastSearchesEl = document.getElementById('past-searches');
+
 
 // create function to build buttons beneath search form with city name pulled from local storage
 var displayPastSearches = function () {
@@ -33,10 +35,9 @@ var addToPastSearches = function (input) {
         newPastSearch.value = input;
         newPastSearch.setAttribute('class', 'past-search-btn w-100 my-1 btn btn-lg btn-primary');
         pastSearchesEl.appendChild(newPastSearch);
-
 }
 
- // create function to fetch openweathermap api 
+ // create function to fetch openweathermap current weather api 
 var getApi = function (city) {
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + "&units=imperial";
 
@@ -149,7 +150,7 @@ var buildForecast = function(data) {
 var clearForecastEl = function(){
       // clear out forecast cards from screen if user searches while cards are already present on the screen 
       if (document.querySelector('.forecast-card')){
-        document.querySelector('#forecast').innerHTML = null;
+        forecastEl.innerHTML = null;
     }
 }
   
