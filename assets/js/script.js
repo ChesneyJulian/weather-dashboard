@@ -38,7 +38,7 @@ var addToPastSearches = function (input) {
 
  // create function to fetch openweathermap api 
 var getApi = function (city) {
-    var requestUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + "&units=imperial";
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + "&units=imperial";
 
     fetch(requestUrl)
     .then(function(response) {  
@@ -81,7 +81,7 @@ var getApi = function (city) {
 
 var getForecast = function (lat, lon) {
     // use coordinates from previous function to act as lat and lon for forecast api url
-    var forecastApiUrl = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid="+ apiKey + "&units=imperial";
+    var forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid="+ apiKey + "&units=imperial";
     fetch(forecastApiUrl)
     .then(function(response) {
         return response.json();
